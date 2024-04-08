@@ -1,0 +1,69 @@
+﻿.invoice {
+   
+    border: 0px solid #f4f4f4 !important; 
+    
+}
+.qty {
+    width:10%;
+}
+.item {
+    width:27%;
+}
+.cancellationFee {
+    width:21%;
+    text-align:right;
+}
+.installment {
+    width:12%;
+    text-align:right;
+}
+.unitPrice {
+    width:15%;
+    text-align:right;
+}
+.subTotal {
+    width:15% !important;
+    text-align:right !important;
+}
+.tdUnitPrice {
+    text-align:right !important;
+}
+.payDetailstd {
+    width:35% !important;
+    
+}
+.amountPaid {
+    padding-left:10px !important;
+    padding-bottom:5px !important;
+    text-align:right !important;
+}
+.tdDetails {
+    width:25% !important;
+    /*padding:0px !important;*/
+}
+.tdSubTotal {
+    width:40% !important;
+    padding:0px !important;
+}
+.paymentSubtd1 {
+    width:60% !important;
+    text-align:left !important;
+}
+.paymentSubtd2 {
+    text-align:right !important;
+}
+.paymentSubtd3 {
+    width:78% !important;
+    text-align:right !important;
+}
+.paymentSubtdLeft3 {
+    width:60% !important;
+    text-align:left !important;
+}
+.paymentHistorytd2 {
+    text-align:right !important;
+    padding-right: 0px !important;
+}
+#btnPrint {
+    margin-right:10px !important;
+}

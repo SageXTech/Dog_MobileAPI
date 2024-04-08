@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d00e527e962e4a3da8b8ee075c32317a" Name="Diagram1">
+        <EntityTypeShape EntityType="DogCRMModel.Login" Width="1.5" PointX="2.625" PointY="0.75" />
+        <EntityTypeShape EntityType="DogCRMModel.Dog" Width="1.5" PointX="0.75" PointY="0.625" />
+        <EntityTypeShape EntityType="DogCRMModel.DogUserProfile" Width="1.5" PointX="6.625" PointY="1.125" />
+        <EntityTypeShape EntityType="DogCRMModel.UserToken" Width="1.5" PointX="3.375" PointY="3.75" />
+        <EntityTypeShape EntityType="DogCRMModel.ForgotPassword" Width="1.5" PointX="4.5" PointY="1.375" />
+        <EntityTypeShape EntityType="DogCRMModel.EventManager" Width="1.5" PointX="5.375" PointY="4.75" />
+        <EntityTypeShape EntityType="DogCRMModel.EventCategory" Width="1.5" PointX="3.5" PointY="5.875" />
+        <EntityTypeShape EntityType="DogCRMModel.UserEventInterested" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="DogCRMModel.Notification" Width="1.5" PointX="7.375" PointY="4.75" />
+        <EntityTypeShape EntityType="DogCRMModel.GuestUser" Width="1.5" PointX="0.75" PointY="4.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

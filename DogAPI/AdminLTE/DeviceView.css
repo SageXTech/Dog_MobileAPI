@@ -1,0 +1,170 @@
+﻿@media only screen and (max-width: 750px) {
+    .navTitle {
+        display: none;
+    }
+
+    .simplyLogo {
+        display: none;
+    }
+    /*.skin-purple .main-header .logo  {
+        background-color: #555299 !important;
+    }*/
+}
+
+/*@media only screen and (min-width: 750px) {
+    .skin-purple .main-header .logo  {
+        background-color: #ffffff !important;
+    }
+}*/
+
+.badgeSM {
+    height: 25px;
+    width: 25px;
+    margin-left: 0px;
+    padding-left: 1px;
+    display: table-cell;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 50%;
+    background: #222d32;
+    Color: #fff;
+    margin-top: 0px;
+    padding-top: 2px;
+    font-size:12px;
+}
+
+.badgeLG {
+    height: 90px;
+    width: 90px;
+    display: table-cell;
+    text-align: center;
+    font-weight: bold;
+    vertical-align: middle;
+    border-radius: 50%;
+    background: #222d32;
+    Color: #fff;
+    font-size: 56px;
+    display: table;
+    padding-top:2px;
+    margin-top: 0px;
+    margin-right: auto;
+    margin-bottom: 0px;
+    margin-left: auto;
+}
+
+.badgeMD {
+    height: 50px;
+    width: 50px;
+    display: table-cell;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 50%;
+    background: #605ca8;
+    Color: #fff;
+}
+
+.skin-blue .badgeMD {
+    background-color: #BC5637;
+}
+.skin-blue .badgeSM {
+    background-color: #E8927F;
+}
+.skin-blue .badgeLG {
+    background-color: #E8927F;
+}
+
+.skin-black .badgeMD {
+    background-color: #fff;
+    color: black;
+}
+.skin-black .badgeSM {
+    background-color: black;
+    color: white;
+}
+.skin-black .badgeLG {
+    background-color: #fff;
+    color: black;
+}
+
+.skin-green .badgeMD {
+    background-color: #00a65a;
+}
+
+.skin-red .badgeMD {
+    background-color: #dd4b39;
+}
+
+.skin-yellow .badgeMD {
+    background-color: #f39c12;
+}
+
+.skin-blue-light .badgeMD {
+    background-color: #3c8dbc;
+}
+.skin-blue-light .badgeSM {
+    background-color: #f9fafc;
+    color:#3c8dbc;
+}
+.skin-blue-light .badgeLG {
+    background-color: #f9fafc;
+    color:#3c8dbc;
+}
+
+.skin-black-light .badgeMD {
+    background-color: black;
+    color:#fff;
+}
+.skin-black-light .badgeSM {
+    background-color: black;
+    color:#f9fafc;
+}
+.skin-black-light .badgeLG {
+    background-color: #f9fafc;
+    color:black;
+}
+.skin-green-light .badgeMD {
+    background-color: #00a65a;
+}
+.skin-green-light .badgeSM {
+    background-color: #f9fafc;
+    color:#00a65a;
+}
+.skin-green-light .badgeLG {
+    background-color: #f9fafc;
+    color:#00a65a;
+}
+.skin-red-light .badgeMD{
+    background-color: #dd4b39;
+}
+.skin-red-light .badgeSM{
+    background-color: #f9fafc;
+    color:black;
+}
+.skin-red-light .badgeLG{
+    background-color: #f9fafc;
+    color:black;
+}
+.skin-yellow-light .badgeMD{
+    background-color: #f39c12;
+}
+.skin-yellow-light .badgeSM{
+    background-color: #f9fafc;
+    color:black;
+}
+.skin-yellow-light .badgeLG{
+    background-color: #f9fafc;
+    color:black;
+}
+.skin-purple-light .badgeMD {
+    background-color: #605ca8;
+}
+.skin-purple-light .badgeSM {
+    background-color: #f9fafc;
+    color:#605ca8;
+}
+.skin-purple-light .badgeLG {
+    background-color: #f9fafc;
+    color:#605ca8;
+}

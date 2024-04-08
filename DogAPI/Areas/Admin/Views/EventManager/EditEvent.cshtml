@@ -1,0 +1,26 @@
+﻿@model DogAPI.Areas.Admin.Models.EventModel
+
+@{
+    ViewBag.Title = "Update Event";
+}
+
+@using (Html.BeginForm("EditEvent", "EventManager", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                Update Event
+            </h1>
+            <h3 align="right" style="margin:1%;"> @Html.ActionLink("EventList", "EventList", "EventManager")</h3>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="box box-primary">
+                @{ Html.RenderPartial("_CreateOrUpdatePartial", Model);}
+                <!-- /.row -->
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+}
+

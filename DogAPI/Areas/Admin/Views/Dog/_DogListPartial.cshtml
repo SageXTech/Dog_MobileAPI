@@ -1,0 +1,205 @@
+﻿@model IEnumerable<DogAPI.Areas.Admin.Models.DogModel>
+@using DogAPI.Areas.Admin.Models
+@{
+    ViewBag.Title = "Dog List";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    //Layout = null;
+}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css">
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1>
+            Dog List
+        </h1>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="box box-primary">
+            <div class="box-body">
+                @if (@TempData["Success"] != null)
+                {
+                    <div class="alert btn-success" id="msgDisply">
+                        <span> @TempData["Success"]</span>
+                    </div>
+                }
+                @Html.AntiForgeryToken()
+
+                <table id="DogList" class="display nowrap" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Breed)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Size)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Age)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Gender)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ImagesUrl)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.VideosUrl)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Characteristics)
+                            </th>
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.Description)
+                            </th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Breed)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.TextAreaFor(modelItem => item.Size, new { @class = "form-control", @disabled = "disabled", @style = "width: 190px; max-width: 100%; margin: 0px 5px 0px 0px; height: 55px;" })
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Age)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Gender)
+                                </td>
+                                <td>
+                                    @Html.HiddenFor(modelItem => item.ImagesUrl)
+                                    @if (item != null)
+                                    {
+                                        if (!string.IsNullOrEmpty(item.ImagesUrl))
+                                        {
+                                            var res = item.ImagesUrl.Split(',');
+                                            for (int i = 0; i < res.Count(); i++)
+                                            {
+                                                <img src="~/Areas/Admin/UploadedFiles/@Url.Content(res[i])" class="img-rounded" style="max-width:100px;max-height:100px; margin:1%;" />
+                                            }
+                                        }
+                                    }
+                                    @*@foreach (var res in item.ImagesUrl.Split(','))
+                                    {
+                                        <img src="~/Areas/Admin/UploadedFiles/@Url.Content(res.ToString())" class="img-rounded" style="max-width:100px;max-height:100px; margin:1%;" />
+                                    }*@
+                                </td>
+                                <td>
+                                    @Html.HiddenFor(modelItem => item.VideosUrl)
+                                    @if (item != null)
+                                    {
+                                        if (!string.IsNullOrEmpty(item.VideosUrl))
+                                        {
+                                            var re = item.VideosUrl.Split(',');
+                                            for (int i = 0; i < re.Count(); i++)
+                                            {
+                                                @*<video controls src="~/Areas/Admin/UploadedVideos/@Url.Content(re[i])" preload="none" class="img-rounded" style="width:150px;height:100px;margin:1%;"></video>*@
+                                                <iframe style="width:150px;height:100px;margin:1%;"
+                                                        src="https://www.youtube.com/embed/@Url.Content(re[i])"></iframe>
+                                            }
+                                        }
+                                    }
+                                </td>
+                                <td>
+                                    @Html.TextAreaFor(modelItem => item.Characteristics, new { @class = "form-control", @disabled = "disabled",@style= "width: 306px; max-width: 100%; margin: 0px; height: 79px;" })
+                                </td>
+                                <td>
+                                    @Html.TextAreaFor(modelItem => item.Description, new { @class = "form-control", @disabled = "disabled", @maxlength = "100",@style= "width: 306px; max-width: 100%; margin: 0px; height: 79px;" })
+                                </td>
+                                <td>
+                                    <a onclick="location.href='@Url.Action("Edit","Dog",new {id = item.Id })'"><i class='glyphicon glyphicon-edit' title="Edit Dog"></i></a>
+                                    <a href="@Url.Action("DeleteDogById","Dog",new {id = item.Id })" onclick="return confirm('Are you sure you want to delete?')" id="anrDelete"><i class='glyphicon glyphicon-trash' title="Delete Dog"></i></a><br />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <br />
+            </div>
+            <!-- /.row -->
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+<script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+
+<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+
+<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
+@*<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>*@
+
+<script>
+    $(document).ready(function () {
+        setTimeout(function () {
+            $('#msgDisply').fadeOut('fast');
+        }, 2000);
+    });
+    $('#DogList').DataTable({
+        processing: true,
+        bDeferRender: true,
+        scrollX: true,
+        "dom": 'Blfrtip',
+        "buttons": ['copy', 'csv', 'excel', 'pdf', 'print'],
+        //dom: 'Bfrtip',
+        //buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+        //buttons: [
+        //    {
+        //        extend: 'copy',
+        //        exportOptions: {
+        //            columns: ':visible'
+        //        }
+        //    },
+        //    {
+        //        extend: 'csv',
+        //        filename: 'DogList',
+        //        exportOptions: {
+        //            columns: ':visible'
+        //        }
+        //    },
+        //    {
+        //        extend: 'excel',
+        //        filename: 'DogList',
+        //        exportOptions: {
+        //            columns: ':visible'
+        //        }
+        //    },
+        //    {
+        //        extend: 'pdf',
+        //        filename: 'DogList',
+        //        exportOptions: {
+        //            columns: ':visible'
+        //        }
+        //    },
+        //    {
+        //        extend: 'print',
+        //        exportOptions: {
+        //            columns: ':visible'
+        //        }
+        //    }
+        //]
+    });
+</script>

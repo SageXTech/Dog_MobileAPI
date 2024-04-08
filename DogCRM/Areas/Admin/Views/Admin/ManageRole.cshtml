@@ -1,0 +1,95 @@
+﻿@model DogCRM.Areas.Admin.Models.LoginModel
+@using DogCRM.Areas.Admin.Models
+@{
+    /**/
+    ViewBag.Title = "Create Role";
+}
+
+@using (Html.BeginForm("ManageRole", "Admin", FormMethod.Post))
+{
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                Create Role
+            </h1>
+            <h3 align="right" style="margin:1%;"> @Html.ActionLink("RoleList", "RoleList", "Admin")</h3>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="box box-primary">
+                <div class="login-box-body">
+                    @*<div class="pull-right">
+                        <h3> @Html.ActionLink("RoleList", "RoleList", "Admin")</h3>
+                    </div>
+                    <br />
+                    <br />
+                    <br />*@
+                    @if (@TempData["Success"] != null)
+                    {
+                        <div class="alert btn-success" id="msgDisply">
+                            <span> @TempData["Success"]</span>
+                        </div>
+                    }
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group has-feedback">
+                        @Html.HiddenFor(x => x.Id)
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email", @autocomplete = "off" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", @autocomplete = "off" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger", @autocomplete = "off" })
+                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        @Html.PasswordFor(m => m.Confirm_Password, new { @class = "form-control", @placeholder = "Confirm Password", @autocomplete = "off" })
+                        @Html.ValidationMessageFor(m => m.Confirm_Password, "", new { @class = "text-danger" })
+                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        @Html.DropDownListFor(m => m.Role, EnumHelper.GetSelectList(typeof(DisplayRole)), "Select Role", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Role, "", new { @class = "text-danger" })
+                    </div>
+
+                    @*<div class="form-group has-feedback">
+                            @Html.TextBoxFor(m => m.Role, new { @class = "form-control", @placeholder = "role" })
+                            @Html.ValidationMessageFor(m => m.Role, "", new { @class = "text-danger" })
+                            @*<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                        </div>*@
+                    <br />
+                    <div class="box-footer">
+                        <div class="pull-left">
+                            <button id="btncancel" type="button" class="btn btn-danger" data-dismiss="modal" onclick="location.href='@Url.Action("ManageRole","Admin")';">Cancel</button>
+                            <button id="btnSave" type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        setTimeout(function () {
+            $('#msgDisply').fadeOut('fast');
+        }, 2000);
+    });
+</script>
+
+
+
+@*<script>
+        $(document).ready(function () {
+                toastr.success(@TempData["Success"]);
+        });
+
+</script>*@
+
+
+

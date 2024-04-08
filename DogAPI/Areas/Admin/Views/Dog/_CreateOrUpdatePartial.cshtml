@@ -1,0 +1,207 @@
+﻿@using DogAPI.Areas.Admin.Models
+@{
+    @model DogAPI.Areas.Admin.Models.DogModel
+
+}
+
+<div class="login-box-body" onkeydown="return (event.keyCode!=13)">
+    @*<div class="pull-right">
+            <h3> @Html.ActionLink("DogList", "DogList", "Dog")</h3>
+        </div>
+        <br />
+        <br />*@
+    @if (@TempData["Success"] != null)
+    {
+        <div class="alert btn-success" id="msgDisply">
+            <span> @TempData["Success"]</span>
+        </div>
+    }
+    @if (@TempData["Error"] != null)
+    {
+        <div class="alert btn-danger" id="msgDisply">
+            <span> @TempData["Error"]</span>
+        </div>
+    }
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group col-sm-12">
+        <div class="col-sm-6">
+            @Html.LabelFor(model => model.Breed, htmlAttributes: new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.Breed, new { @class = "form-control", @placeholder = "Enter Dog Breed", @autocomplete = "off" })
+            @Html.ValidationMessageFor(model => model.Breed, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-sm-6">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @placeholder = "Enter Dog Name", @autocomplete = "off" })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group col-sm-12">
+        <div class="col-sm-6">
+            @Html.LabelFor(model => model.Size, htmlAttributes: new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.Size, new { @class = "form-control", @placeholder = "Enter Dog Size", @autocomplete = "off" })
+            @Html.ValidationMessageFor(model => model.Size, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-sm-6">
+            @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.Age, new { @class = "form-control", @placeholder = "Enter Dog Age", @autocomplete = "off" })
+            @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group col-sm-12">
+        <div class="col-sm-6">
+            @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label" })
+            @Html.DropDownListFor(model => model.Gender, EnumHelper.GetSelectList(typeof(DogGender)), "Select Gender", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-sm-6">
+            @Html.HiddenFor(x => x.ImagesUrl)
+            @Html.LabelFor(model => model.ImagesUrl, htmlAttributes: new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.files, "", new { @type = "file", @multiple = "multiple", @class = "form-control", @autocomplete = "off", @onchange = "ShowPreview(this)" })
+            @Html.ValidationMessageFor(model => model.files, "", new { @class = "text-danger" })
+            <div id="divImageMediaPreview">
+            </div>
+            @if (Model != null)
+            {
+                if (!string.IsNullOrEmpty(Model.ImagesUrl))
+                {
+                    var res = Model.ImagesUrl.Split(',');
+                    foreach (var re in Model.ImagesUrl.Split(','))
+                    {
+                        <img src="~/Areas/Admin/UploadedFiles/@Url.Content(re)" class="img-rounded" style="max-width:80px;margin:1%;" />
+                    }
+                }
+            }
+        </div>
+    </div>
+    <div class="form-group col-sm-12">
+        <div class="col-sm-6">
+            @Html.HiddenFor(x => x.VideosUrl)
+            @Html.LabelFor(model => model.VideosUrl, htmlAttributes: new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.Video, "", new { @id = "txtVideolist", @type = "file", @multiple = "multiple", @class = "form-control", @autocomplete = "off" })
+            @Html.ValidationMessageFor(model => model.Video, "", new { @class = "text-danger" })
+            @if (Model != null)
+            {
+                if (!string.IsNullOrEmpty(Model.VideosUrl))
+                {
+                    var res = Model.VideosUrl.Split(',');
+                    foreach (var re in Model.VideosUrl.Split(','))
+                    {
+                        @*<video controls src="~/Areas/Admin/UploadedVideos/@Url.Content(re)" preload="none" class="img-rounded" style="width:150px;height:100px;margin:1%;"></video>*@
+                        <iframe style="width:150px;height:100px;margin:1%;"
+                                src="https://www.youtube.com/embed@Url.Content(re)"></iframe>
+                    }
+                }
+            }
+        </div>
+        <div class="col-sm-6 VedeoVal">
+            @Html.LabelFor(model => model.videoTitle, htmlAttributes: new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.videoTitle, new {@id= "txtvideoTitle", @class = "form-control", @placeholder = "Enter video title", @autocomplete = "off" })
+            @Html.ValidationMessageFor(model => model.videoTitle, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group col-sm-12 VedeoVal">
+        <div class="col-sm-6">
+            @Html.LabelFor(model => model.videoDescription, htmlAttributes: new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.videoDescription, new {@id= "txtvideoDescription", @class = "form-control", @placeholder = "Enter video description", @autocomplete = "off" })
+            @Html.ValidationMessageFor(model => model.videoDescription, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-sm-6">
+            @Html.HiddenFor(x => x.Tags,new { @id="txtTaglist"})
+            @Html.LabelFor(model => model.Tags, htmlAttributes: new { @class = "control-label"})
+            <input name="tags" id="input-tags" class="form-control txtTgs" />
+
+        </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <div class="col-sm-6">
+                @Html.LabelFor(model => model.Characteristics, htmlAttributes: new { @class = "control-label" })
+                @Html.TextAreaFor(model => model.Characteristics, new { @class = "form-control", @placeholder = "Enter Dog Characteristics", @autocomplete = "off" })
+                @Html.ValidationMessageFor(model => model.Characteristics, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-sm-6">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label" })
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @placeholder = "Enter Dog Description", @autocomplete = "off" })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="box-footer">
+            <div class="pull-left col-sm-12">
+                <button id="btncancel" type="button" class="btn btn-danger" data-dismiss="modal" onclick="location.href='@Url.Action("Index","Dog")';">Cancel</button>
+                <button id="btnSave" type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<link href="~/Scripts/jquery.tagsinput.min.css" rel="stylesheet" />
+
+<script src="~/Scripts/jquery.tagsinput.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#input-tags').tagsInput();
+        //$('#Tags').val() == $('.txtTgs').val();
+    });
+</script>
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>*@
+<script>
+    $(document).ready(function () {
+        $('.VedeoVal').hide();
+
+        $('#txtVideolist').change(function () {
+            $(".VedeoVal").show();
+        });
+
+        $("#btnSave").click(function () {
+            var TagString='';
+            var TagList = $(".tag");
+            if (TagList.length > 0) {
+                for (var i = 0; i < TagList.length; i++){
+                    var Tag = TagList[i].innerText.slice(0, -1).trim();
+                    TagString += Tag + ',';
+                }
+            }
+            $("#txtTaglist").val(TagString);
+        });
+       
+        setTimeout(function () {
+            $('#msgDisply').fadeOut('fast');
+        }, 2000);
+        $("#files").change(function () {
+            if (typeof (FileReader) != "undefined") {
+                var dvPreview = $("#divImageMediaPreview");
+                dvPreview.html("");
+                $($(this)[0].files).each(function () {
+                    debugger
+                    var file = $(this);
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var img = $("<img />");
+                        img.attr("class", "img-rounded");
+                        img.attr("style", "max-width:150px;margin:1%;");
+                        img.attr("src", e.target.result);
+                        dvPreview.append(img);
+                    }
+                    reader.readAsDataURL(file[0]);
+                });
+            } else {
+                alert("This browser does not support HTML5 FileReader.");
+            }
+        });
+    });
+
+    //function ShowPreview(input) {
+    //    for (var i = 0; i < input.files.length; i++) {
+    //        if (input.files && input.files[i]) {
+    //            debugger;
+    //            var ImageDir = new FileReader();
+    //            ImageDir.onload = function (e) {
+    //                $('#impPrev').attr('src', e.target.result);
+    //            }
+    //            ImageDir.readAsDataURL(input.files[i]);
+    //        }
+    //    }
+    //}
+
+</script>
